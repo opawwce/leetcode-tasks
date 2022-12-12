@@ -1,46 +1,35 @@
-// Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
-// You may assume that each input would have exactly one solution, and you may not use the same element twice.
-// You can return the answer in any order.
+// 70. Climbing Stairs
+
+// You are climbing a staircase. It takes n steps to reach the top.
+// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
 // Example 1
-// Input: nums = [2,7,11,15], target = 9
-// Output: [0,1]
-// Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+// Input: n = 2
+// Output: 2
+// Explanation: There are two ways to climb to the top.
+// 1. 1 step + 1 step
+// 2. 2 steps
+
+// Example 2
+// Input: n = 3
+// Output: 3
+// Explanation: There are three ways to climb to the top.
+// 1. 1 step + 1 step + 1 step
+// 2. 1 step + 2 steps
+// 3. 2 steps + 1 step
 
 /**
- * @param {number[]} nums
- * @param {number} target
- * @return {number[]}
+ * @param {number} n
+ * @return {number}
  */
-var twoSum = function(nums, target) {
-
-    const collection = new Map();
-    for (let i = 0; i < nums.length; i++) {
-        if (collection.get(nums[i]) != undefined) {
-            return [collection.get(nums[i]), i];
-        }
-
-        collection.set(target - nums[i], i);
+var climbStairs = function(n) {
+    let possibleWays = [1, 2];
+    for (let i = 2; i < n; i++) {
+        possibleWays.push(possibleWays[i-2] + possibleWays[i-1]);
     }
-
-    // for (let i = 0; i < nums.length; i++) {
-    //     for (let j = i+1; j < nums.length; j++) {
-    //         if (nums[i] + nums[j] == target) {
-    //             return [i, j];
-    //         }
-    //     }
-    // }
-
-    // for (let i = 0; i < nums.length; i++) {
-    //     let otherNums = nums.slice(i+1);
-    //     secondAdd = target - nums[i];
-    //     if (otherNums.indexOf(secondAdd) >= 0) {
-    //         return [i, otherNums.indexOf(secondAdd)+i+1];
-    //     }
-    // }
-
+    return possibleWays[n-1];
 };
 
-console.log(twoSum([2, 7, 11, 15], 9));
-console.log(twoSum([3, 2, 4], 6));
-console.log(twoSum([3, 3], 6));
+console.log(climbStairs(2)); // 2
+console.log(climbStairs(3)); // 3
+console.log(climbStairs(10)); // 89
