@@ -1,35 +1,51 @@
-// 70. Climbing Stairs
+// 9. Palindrome Number
 
-// You are climbing a staircase. It takes n steps to reach the top.
-// Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+// Given an integer x, return true if x is a palindrome, and false otherwise.
 
 // Example 1
-// Input: n = 2
-// Output: 2
-// Explanation: There are two ways to climb to the top.
-// 1. 1 step + 1 step
-// 2. 2 steps
+// Input: x = 121
+// Output: true
+// Explanation: 121 reads as 121 from left to right and from right to left.
 
 // Example 2
-// Input: n = 3
-// Output: 3
-// Explanation: There are three ways to climb to the top.
-// 1. 1 step + 1 step + 1 step
-// 2. 1 step + 2 steps
-// 3. 2 steps + 1 step
+// Input: x = -121
+// Output: false
+// Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+
+// Example 3
+// Input: x = 10
+// Output: false
+// Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
 /**
- * @param {number} n
- * @return {number}
+ * @param {number} x
+ * @return {boolean}
  */
-var climbStairs = function(n) {
-    let possibleWays = [1, 2];
-    for (let i = 2; i < n; i++) {
-        possibleWays.push(possibleWays[i-2] + possibleWays[i-1]);
+var isPalindrome = function(x) {
+
+    let numberToString = x.toString();
+
+    // First
+    let str = '';
+    for (let i = numberToString.length-1; i >= 0; i--) {
+        str += numberToString[i];
     }
-    return possibleWays[n-1];
+    return str == numberToString;
+    
+    // // Second
+    // let i = 0;
+    // let j = numberToString.length;
+    // while (i != j) {
+    //     if (numberToString[i] != numberToString[j-1]) {
+    //         return false;
+    //     }
+    //     i++;
+    //     j--;
+    // }
+    // return true;
 };
 
-console.log(climbStairs(2)); // 2
-console.log(climbStairs(3)); // 3
-console.log(climbStairs(10)); // 89
+console.log(isPalindrome(121)); // true
+console.log(isPalindrome(-121)); // false
+console.log(isPalindrome(10)); // false
+console.log(isPalindrome(1121)); // false
