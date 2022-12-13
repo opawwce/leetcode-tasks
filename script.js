@@ -1,51 +1,59 @@
-// 9. Palindrome Number
+// 13. Roman to Integer
 
-// Given an integer x, return true if x is a palindrome, and false otherwise.
+// Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+
+// For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
+// Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+
+// - I can be placed before V (5) and X (10) to make 4 and 9. 
+// - X can be placed before L (50) and C (100) to make 40 and 90. 
+// - C can be placed before D (500) and M (1000) to make 400 and 900.
 
 // Example 1
-// Input: x = 121
-// Output: true
-// Explanation: 121 reads as 121 from left to right and from right to left.
+// Input: s = "III"
+// Output: 3
+// Explanation: III = 3.
 
 // Example 2
-// Input: x = -121
-// Output: false
-// Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+// Input: s = "LVIII"
+// Output: 58
+// Explanation: L = 50, V= 5, III = 3.
 
 // Example 3
-// Input: x = 10
-// Output: false
-// Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+// Input: s = "MCMXCIV"
+// Output: 1994
+// Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 /**
- * @param {number} x
- * @return {boolean}
+ * @param {string} s
+ * @return {number}
  */
-var isPalindrome = function(x) {
 
-    let numberToString = x.toString();
+const romanInt = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000
+}
 
-    // First
-    let str = '';
-    for (let i = numberToString.length-1; i >= 0; i--) {
-        str += numberToString[i];
+var romanToInt = function(s) {
+    let intNumber = 0;
+    let prev = 0;
+    let current = 0;
+    for (let i = 0; i < s.length; i++) {
+        current = romanInt[s[i]];
+        intNumber += current;
+        if (current > prev) {
+            intNumber -= prev * 2;
+        }
+        prev = current;
     }
-    return str == numberToString;
-    
-    // // Second
-    // let i = 0;
-    // let j = numberToString.length;
-    // while (i != j) {
-    //     if (numberToString[i] != numberToString[j-1]) {
-    //         return false;
-    //     }
-    //     i++;
-    //     j--;
-    // }
-    // return true;
+    return intNumber;
 };
 
-console.log(isPalindrome(121)); // true
-console.log(isPalindrome(-121)); // false
-console.log(isPalindrome(10)); // false
-console.log(isPalindrome(1121)); // false
+console.log(romanToInt('III'));     // 3
+console.log(romanToInt('LVIII'));   // 58
+console.log(romanToInt('MCMXCIV')); //1994
