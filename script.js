@@ -31,20 +31,43 @@ function ListNode(val, next) {
  */
 var mergeTwoLists = function(list1, list2) {
     if (!list1) {
-        return list2
+       return list2
     }
 
     if (!list2) {
-        return list1
+       return list1
     }
 
     if (list1.val < list2.val) {
-        list1.next = mergeTwoLists(list1.next, list2);
-        return list1;
+        result = new ListNode(list1.val);
+        list1 = list1.next;
     } else {
-        list2.next = mergeTwoLists(list1, list2.next);
-        return list2;
+        result = new ListNode(list2.val);
+        list2 = list2.next;
     }
+
+    let head = result;
+
+    while (list1 && list2) {
+        if(list1.val < list2.val) {
+            head.next = new ListNode(list1.val);
+            head = head.next;
+            list1 = list1.next;
+        } else {
+            head.next = new ListNode(list2.val);
+            head = head.next;
+            list2 = list2.next;
+        }
+    }
+
+    if (list1) {
+        head.next = list1;
+    }
+    if (list2) {
+        head.next = list2;
+    }
+
+    return result;
 };
 
 console.log(mergeTwoLists([1,2,4], [1,3,4]));   // [1,1,2,3,4,4]
