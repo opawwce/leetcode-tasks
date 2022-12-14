@@ -1,59 +1,52 @@
-// 13. Roman to Integer
+// 21. Merge Two Sorted Lists
 
-// Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
+// You are given the heads of two sorted linked lists list1 and list2.
 
-// For example, 2 is written as II in Roman numeral, just two ones added together. 12 is written as XII, which is simply X + II. The number 27 is written as XXVII, which is XX + V + II.
-// Roman numerals are usually written largest to smallest from left to right. However, the numeral for four is not IIII. Instead, the number four is written as IV. Because the one is before the five we subtract it making four. The same principle applies to the number nine, which is written as IX. There are six instances where subtraction is used:
+// Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
 
-// - I can be placed before V (5) and X (10) to make 4 and 9. 
-// - X can be placed before L (50) and C (100) to make 40 and 90. 
-// - C can be placed before D (500) and M (1000) to make 400 and 900.
+// Return the head of the merged linked list.
 
 // Example 1
-// Input: s = "III"
-// Output: 3
-// Explanation: III = 3.
+// Input: list1 = [1,2,4], list2 = [1,3,4]
+// Output: [1,1,2,3,4,4]
 
 // Example 2
-// Input: s = "LVIII"
-// Output: 58
-// Explanation: L = 50, V= 5, III = 3.
+// Input: list1 = [], list2 = []
+// Output: []
 
 // Example 3
-// Input: s = "MCMXCIV"
-// Output: 1994
-// Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
+// Input: list1 = [], list2 = [0]
+// Output: [0]
 
-/**
- * @param {string} s
- * @return {number}
- */
-
-const romanInt = {
-    'I': 1,
-    'V': 5,
-    'X': 10,
-    'L': 50,
-    'C': 100,
-    'D': 500,
-    'M': 1000
+// Definition for singly-linked list.
+function ListNode(val, next) {
+    this.val = (val===undefined ? 0 : val)
+    this.next = (next===undefined ? null : next)
 }
 
-var romanToInt = function(s) {
-    let intNumber = 0;
-    let prev = 0;
-    let current = 0;
-    for (let i = 0; i < s.length; i++) {
-        current = romanInt[s[i]];
-        intNumber += current;
-        if (current > prev) {
-            intNumber -= prev * 2;
-        }
-        prev = current;
+/**
+ * @param {ListNode} list1
+ * @param {ListNode} list2
+ * @return {ListNode}
+ */
+var mergeTwoLists = function(list1, list2) {
+    if (!list1) {
+        return list2
     }
-    return intNumber;
+
+    if (!list2) {
+        return list1
+    }
+
+    if (list1.val < list2.val) {
+        list1.next = mergeTwoLists(list1.next, list2);
+        return list1;
+    } else {
+        list2.next = mergeTwoLists(list1, list2.next);
+        return list2;
+    }
 };
 
-console.log(romanToInt('III'));     // 3
-console.log(romanToInt('LVIII'));   // 58
-console.log(romanToInt('MCMXCIV')); //1994
+console.log(mergeTwoLists([1,2,4], [1,3,4]));   // [1,1,2,3,4,4]
+console.log(mergeTwoLists([], []));   // []
+console.log(mergeTwoLists([], [0]));   // [0]
