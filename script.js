@@ -1,75 +1,41 @@
-// 21. Merge Two Sorted Lists
+// 1920. Build Array from Permutation
 
-// You are given the heads of two sorted linked lists list1 and list2.
+// Given a zero-based permutation nums (0-indexed), build an array ans of the same length where ans[i] = nums[nums[i]] for each 0 <= i < nums.length and return it.
 
-// Merge the two lists in a one sorted list. The list should be made by splicing together the nodes of the first two lists.
-
-// Return the head of the merged linked list.
+// A zero-based permutation nums is an array of distinct integers from 0 to nums.length - 1 (inclusive).
 
 // Example 1
-// Input: list1 = [1,2,4], list2 = [1,3,4]
-// Output: [1,1,2,3,4,4]
+// Input: nums = [0,2,1,5,3,4]
+// Output: [0,1,2,4,5,3]
+// Explanation: The array ans is built as follows: 
+// ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+//     = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]
+//     = [0,1,2,4,5,3]
 
 // Example 2
-// Input: list1 = [], list2 = []
-// Output: []
+// Input: nums = [5,0,1,2,3,4]
+// Output: [4,5,0,1,2,3]
+// Explanation: The array ans is built as follows:
+// ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]
+//     = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]
+//     = [4,5,0,1,2,3]
 
-// Example 3
-// Input: list1 = [], list2 = [0]
-// Output: [0]
-
-// Definition for singly-linked list.
-function ListNode(val, next) {
-    this.val = (val===undefined ? 0 : val)
-    this.next = (next===undefined ? null : next)
-}
+// Constraints:
+// 1 <= nums.length <= 1000
+// 0 <= nums[i] < nums.length
+// The elements in nums are distinct.
 
 /**
- * @param {ListNode} list1
- * @param {ListNode} list2
- * @return {ListNode}
+ * @param {number[]} nums
+ * @return {number[]}
  */
-var mergeTwoLists = function(list1, list2) {
-    if (!list1) {
-       return list2
+var buildArray = function(nums) {
+    var ans = [];
+    for (let i = 0; i < nums.length; i++) {
+        ans.push(nums[nums[i]]);
     }
-
-    if (!list2) {
-       return list1
-    }
-
-    if (list1.val < list2.val) {
-        result = new ListNode(list1.val);
-        list1 = list1.next;
-    } else {
-        result = new ListNode(list2.val);
-        list2 = list2.next;
-    }
-
-    let head = result;
-
-    while (list1 && list2) {
-        if(list1.val < list2.val) {
-            head.next = new ListNode(list1.val);
-            head = head.next;
-            list1 = list1.next;
-        } else {
-            head.next = new ListNode(list2.val);
-            head = head.next;
-            list2 = list2.next;
-        }
-    }
-
-    if (list1) {
-        head.next = list1;
-    }
-    if (list2) {
-        head.next = list2;
-    }
-
-    return result;
+    return ans;
 };
 
-console.log(mergeTwoLists([1,2,4], [1,3,4]));   // [1,1,2,3,4,4]
-console.log(mergeTwoLists([], []));   // []
-console.log(mergeTwoLists([], [0]));   // [0]
+console.log(buildArray([0,2,1,5,3,4])); // [0,1,2,4,5,3]
+console.log(buildArray([5,0,1,2,3,4])); // [4,5,0,1,2,3]
