@@ -1,51 +1,34 @@
-// 1929. Concatenation of Array
+// 2469. Convert the Temperature
 
-// Given an integer array nums of length n, you want to create an array ans of length 2n where ans[i] == nums[i] and ans[i + n] == nums[i] for 0 <= i < n (0-indexed).
+// You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
 
-// Specifically, ans is the concatenation of two nums arrays.
+// You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
 
-// Return the array ans.
+// Return the array ans. Answers within 10-5 of the actual answer will be accepted.
+
+// - Kelvin = Celsius + 273.15
+// - Fahrenheit = Celsius * 1.80 + 32.00
 
 // Example 1
-// Input: nums = [1,2,1]
-// Output: [1,2,1,1,2,1]
-// Explanation: The array ans is formed as follows:
-// - ans = [nums[0],nums[1],nums[2],nums[0],nums[1],nums[2]]
-// - ans = [1,2,1,1,2,1]
+// Input: celsius = 36.50
+// Output: [309.65000,97.70000]
+// Explanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70.
 
 // Example 2
-// Input: nums = [1,3,2,1]
-// Output: [1,3,2,1,1,3,2,1]
-// Explanation: The array ans is formed as follows:
-// - ans = [nums[0],nums[1],nums[2],nums[3],nums[0],nums[1],nums[2],nums[3]]
-// - ans = [1,3,2,1,1,3,2,1]
-
+// Input: celsius = 122.11
+// Output: [395.26000,251.79800]
+// Explanation: Temperature at 122.11 Celsius converted in Kelvin is 395.26 and converted in Fahrenheit is 251.798.
 
 // Constraints:
-// n == nums.length
-// 1 <= n <= 1000
-// 1 <= nums[i] <= 1000
+// 0 <= celsius <= 1000
 
 /**
- * @param {number[]} nums
+ * @param {number} celsius
  * @return {number[]}
  */
-var getConcatenation = function(nums) {
-    let ans = [];
-
-    for (let i = 0; i < nums.length*2; i++) {
-        if (i < nums.length) {
-            ans[i] = nums[i];
-        } else {
-            ans[i] = nums[i - nums.length];
-        }
-    }
-    return ans;
-
-    // Solution 2
-    // return nums.concat(nums);
-    // or return [...nums, ...nums];
+var convertTemperature = function(celsius) {
+    return [celsius + 273.15, celsius * 1.80 + 32.00]
 };
 
-console.log(getConcatenation([1,2,1])); // [1,2,1,1,2,1]
-console.log(getConcatenation([1,3,2,1])); // [1,3,2,1,1,3,2,1]
+console.log(convertTemperature(36.50)); // [309.65000,97.70000]
+console.log(convertTemperature(122.11)); // [395.26000,251.79800]
