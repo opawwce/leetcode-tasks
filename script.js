@@ -1,34 +1,28 @@
-// 2469. Convert the Temperature
+// 1108. Defanging an IP Address
 
-// You are given a non-negative floating point number rounded to two decimal places celsius, that denotes the temperature in Celsius.
-
-// You should convert Celsius into Kelvin and Fahrenheit and return it as an array ans = [kelvin, fahrenheit].
-
-// Return the array ans. Answers within 10-5 of the actual answer will be accepted.
-
-// - Kelvin = Celsius + 273.15
-// - Fahrenheit = Celsius * 1.80 + 32.00
+// Given a valid (IPv4) IP address, return a defanged version of that IP address.
+// A defanged IP address replaces every period "." with "[.]".
 
 // Example 1
-// Input: celsius = 36.50
-// Output: [309.65000,97.70000]
-// Explanation: Temperature at 36.50 Celsius converted in Kelvin is 309.65 and converted in Fahrenheit is 97.70.
+// Input: address = "1.1.1.1"
+// Output: "1[.]1[.]1[.]1"
 
 // Example 2
-// Input: celsius = 122.11
-// Output: [395.26000,251.79800]
-// Explanation: Temperature at 122.11 Celsius converted in Kelvin is 395.26 and converted in Fahrenheit is 251.798.
+// Input: address = "255.100.50.0"
+// Output: "255[.]100[.]50[.]0"
 
 // Constraints:
-// 0 <= celsius <= 1000
+// The given address is a valid IPv4 address.
 
 /**
- * @param {number} celsius
- * @return {number[]}
+ * @param {string} address
+ * @return {string}
  */
-var convertTemperature = function(celsius) {
-    return [celsius + 273.15, celsius * 1.80 + 32.00]
+var defangIPaddr = function(address) {
+    return address.split('.').join('[.]');
+    // OR
+    // return address.replaceAll('.', '[.]');
 };
 
-console.log(convertTemperature(36.50)); // [309.65000,97.70000]
-console.log(convertTemperature(122.11)); // [395.26000,251.79800]
+console.log(defangIPaddr("1.1.1.1")); // 1[.]1[.]1[.]1
+console.log(defangIPaddr( "255.100.50.0")); // 255[.]100[.]50[.]0
