@@ -1,21 +1,41 @@
-// 1470. Shuffle the Array
+// 1672. Richest Customer Wealth
 
 /**
- * @param {number[]} nums
- * @param {number} n
- * @return {number[]}
+ * @param {number[][]} accounts
+ * @return {number}
  */
-var shuffle = function(nums, n) {
+// var sum = function(array) {
+//     let s = 0;
+//     for (let i = 0; i < array.length; i++) {
+//         s+=array[i];
+//     }
+//     return s;
+// }
+// var maximumWealth = function(accounts) {
+//     let wealth = [];
 
-    let ans = [];
-    
-    for (let i = 0; i < n; i++) {
-        ans.push(nums[i]);
-        ans.push(nums[i+n]);
+//     for(let i = 0; i < accounts.length; i++) {
+//         wealth.push(sum(accounts[i]));
+//     }
+
+//     return Math.max(...wealth);
+// };
+
+// OR
+var maximumWealth = function(accounts) {
+    var result = 0;
+
+    for(let i = 0; i < accounts.length; i++){
+        var sum = 0;
+        for(let j = 0; j < accounts[i].length; j++){
+            sum += accounts[i][j];
+        }
+        result = Math.max(result, sum);
     }
-    return ans;
+    
+    return result;
 };
 
-console.log(shuffle([2,5,1,3,4,7], 3));    // [2,3,5,4,1,7]
-console.log(shuffle([1,2,3,4,4,3,2,1], 4));    // [1,4,2,3,3,2,4,1]
-console.log(shuffle([1,1,2,2], 2));  // [1,2,1,2]
+console.log(maximumWealth([[1,2,3],[3,2,1]]));    // 6
+console.log(maximumWealth([[1,5],[7,3],[3,5]]));    // 10
+console.log(maximumWealth([[2,8,7],[7,1,3],[1,9,5]]));    // 17
