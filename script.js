@@ -1,17 +1,26 @@
-// 2160. Minimum Sum of Four Digit Number After Splitting Digits
+// 1431. Kids With the Greatest Number of Candies
 
 /**
-* @param {number} num
-* @return {number}
-*/
-var minimumSum = function (num) {
+ * @param {number[]} candies
+ * @param {number} extraCandies
+ * @return {boolean[]}
+ */
+var kidsWithCandies = function (candies, extraCandies) {
 
-    numArray = Array.from(num.toString());
-    numArray.sort((a, b) => a - b);
+    let answer = [];
+    let max = 0;
+    for (let i = 0; i < candies.length; i++) {
+        if (max <= candies[i]) {
+            max = candies[i];
+        }
+    }
 
-    return parseInt(numArray[0] + numArray[2]) + parseInt(numArray[1] + numArray[3]);
+    for (let i = 0; i < candies.length; i++) {
+        answer.push(candies[i] + extraCandies >= max);
+    }
 
+    return answer;
 };
 
-console.log(minimumSum(2932));    // 52
-console.log(minimumSum(4009));    // 13
+console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));    // [true,true,true,false,true]
+console.log(kidsWithCandies([4, 2, 1, 1, 2], 1));    // [true,false,false,false,false]
