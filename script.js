@@ -1,41 +1,32 @@
-// 1672. Richest Customer Wealth
+// 2114. Maximum Number of Words Found in Sentences
 
 /**
- * @param {number[][]} accounts
+ * @param {string[]} sentences
  * @return {number}
  */
-// var sum = function(array) {
-//     let s = 0;
-//     for (let i = 0; i < array.length; i++) {
-//         s+=array[i];
-//     }
-//     return s;
-// }
-// var maximumWealth = function(accounts) {
-//     let wealth = [];
+var mostWordsFound = function (sentences) {
 
-//     for(let i = 0; i < accounts.length; i++) {
-//         wealth.push(sum(accounts[i]));
-//     }
+    let max = 0;
+    for (let i = 0; i < sentences.length; i++) {
 
-//     return Math.max(...wealth);
-// };
+        // // 1
+        // let counter = 1;
+        // for (let char of sentences[i]) {
+        //     if (char == ' ') {
+        //         counter += 1;
+        //     }
+        // }
 
-// OR
-var maximumWealth = function(accounts) {
-    var result = 0;
+        // if (counter > max) {
+        //     max = counter;
+        // }
 
-    for(let i = 0; i < accounts.length; i++){
-        var sum = 0;
-        for(let j = 0; j < accounts[i].length; j++){
-            sum += accounts[i][j];
-        }
-        result = Math.max(result, sum);
+        // 2
+        let words = sentences[i].split(' ').length;
+        if (words > max) max = words;
     }
-    
-    return result;
+    return max;
 };
 
-console.log(maximumWealth([[1,2,3],[3,2,1]]));    // 6
-console.log(maximumWealth([[1,5],[7,3],[3,5]]));    // 10
-console.log(maximumWealth([[2,8,7],[7,1,3],[1,9,5]]));    // 17
+console.log(mostWordsFound(["alice and bob love leetcode", "i think so too", "this is great thanks very much"]));  // 6
+console.log(mostWordsFound(["please wait", "continue to fight", "continue to win"]));  // 3
