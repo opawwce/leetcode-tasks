@@ -1,32 +1,17 @@
-// 2114. Maximum Number of Words Found in Sentences
+// 2160. Minimum Sum of Four Digit Number After Splitting Digits
 
 /**
- * @param {string[]} sentences
- * @return {number}
- */
-var mostWordsFound = function (sentences) {
+* @param {number} num
+* @return {number}
+*/
+var minimumSum = function (num) {
 
-    let max = 0;
-    for (let i = 0; i < sentences.length; i++) {
+    numArray = Array.from(num.toString());
+    numArray.sort((a, b) => a - b);
 
-        // // 1
-        // let counter = 1;
-        // for (let char of sentences[i]) {
-        //     if (char == ' ') {
-        //         counter += 1;
-        //     }
-        // }
+    return parseInt(numArray[0] + numArray[2]) + parseInt(numArray[1] + numArray[3]);
 
-        // if (counter > max) {
-        //     max = counter;
-        // }
-
-        // 2
-        let words = sentences[i].split(' ').length;
-        if (words > max) max = words;
-    }
-    return max;
 };
 
-console.log(mostWordsFound(["alice and bob love leetcode", "i think so too", "this is great thanks very much"]));  // 6
-console.log(mostWordsFound(["please wait", "continue to fight", "continue to win"]));  // 3
+console.log(minimumSum(2932));    // 52
+console.log(minimumSum(4009));    // 13
