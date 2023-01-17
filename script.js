@@ -1,26 +1,25 @@
-// 1431. Kids With the Greatest Number of Candies
+// 2236. Root Equals Sum of Children
+
+
+// Definition for a binary tree node.
+function TreeNode(val, left, right) {
+    this.val = (val === undefined ? 0 : val)
+    this.left = (left === undefined ? null : left)
+    this.right = (right === undefined ? null : right)
+}
 
 /**
- * @param {number[]} candies
- * @param {number} extraCandies
- * @return {boolean[]}
+ * @param {TreeNode} root
+ * @return {boolean}
  */
-var kidsWithCandies = function (candies, extraCandies) {
+var checkTree = function (root) {
 
-    let answer = [];
-    let max = 0;
-    for (let i = 0; i < candies.length; i++) {
-        if (max <= candies[i]) {
-            max = candies[i];
-        }
-    }
+    let tree = new TreeNode(root[0], root[1], root[2]);
+    return tree.val == tree.left + tree.right;
 
-    for (let i = 0; i < candies.length; i++) {
-        answer.push(candies[i] + extraCandies >= max);
-    }
-
-    return answer;
+    // idk why this worked in leetcode compilator but my version above not worked
+    // return root.val == root.left.val + root.right.val;
 };
 
-console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));    // [true,true,true,false,true]
-console.log(kidsWithCandies([4, 2, 1, 1, 2], 1));    // [true,false,false,false,false]
+console.log(checkTree([10, 4, 6]));   // true
+console.log(checkTree([5, 3, 1]));   // false
